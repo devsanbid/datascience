@@ -6,7 +6,7 @@
 Report/
 run_analysis.R
 clean_code_script/
-
+test/
 # R temporary files
 .Rhistory
 .RData
