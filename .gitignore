@@ -3,9 +3,6 @@
 # =============================================================================
 
 # Exclude these folders/files (as requested)
-Report/
-run_analysis.R
-clean_code_script/
 test/
 # R temporary files
 .Rhistory
