@@ -1,9 +1,3 @@
-# =============================================================================
-# LINEAR MODEL: Broadband Download Speed vs Crime Rate (Drug Offences)
-# ST5014CEM - Data Science for Developers
-# Counties: Cheshire and Cumberland
-# =============================================================================
-
 # Load required libraries
 library(tidyverse)
 library(ggplot2)
@@ -24,9 +18,6 @@ if (!dir.exists(file.path(base_path, "Charts"))) {
   dir.create(file.path(base_path, "Charts"))
 }
 
-# =============================================================================
-# PREPARE DATA
-# =============================================================================
 
 # Aggregate crime data for drug offences
 drug_crime <- crime_agg %>%
@@ -44,10 +35,6 @@ merged_broadband_crime <- broadband_agg %>%
 
 cat("\n=== Linear Model: Download Speed vs Drug Offence Rate ===\n")
 cat("Data points:", nrow(merged_broadband_crime), "\n")
-
-# =============================================================================
-# FIT LINEAR MODEL
-# =============================================================================
 
 # Fit linear model: Download Speed ~ Drug Offence Rate
 model_broadband_crime <- lm(avg_download_speed ~ drug_offence_rate, data = merged_broadband_crime)
@@ -69,17 +56,10 @@ cat("\nR-squared:", round(r_squared, 4), "\n")
 cat("\n95% Confidence Intervals:\n")
 print(confint(model_broadband_crime))
 
-# =============================================================================
-# DIAGNOSTIC PLOTS
-# =============================================================================
-
 # Residuals analysis
 cat("\nResiduals Summary:\n")
 print(summary(model_broadband_crime$residuals))
 
-# =============================================================================
-# CREATE VISUALISATION
-# =============================================================================
 
 # Scatter plot with regression line
 plot_broadband_crime <- ggplot(merged_broadband_crime, aes(x = drug_offence_rate, y = avg_download_speed, color = county)) +
@@ -123,31 +103,3 @@ ggsave(
   dpi = 300
 )
 
-cat("\nSaved: Charts/linear_model_broadband_crime.png\n")
-
-# =============================================================================
-# MODEL INTERPRETATION
-# =============================================================================
-
-cat("\n=== Model Interpretation ===\n")
-cat("This model examines the relationship between drug offence rates\n")
-cat("and broadband download speeds in Cheshire and Cumberland.\n\n")
-
-if (r_squared > 0.5) {
-  cat("Strong relationship: R² =", round(r_squared, 3), "\n")
-} else if (r_squared > 0.3) {
-  cat("Moderate relationship: R² =", round(r_squared, 3), "\n")
-} else {
-  cat("Weak relationship: R² =", round(r_squared, 3), "\n")
-}
-
-# Check coefficient sign
-if (!is.na(coef(model_broadband_crime)[2])) {
-  if (coef(model_broadband_crime)[2] < 0) {
-    cat("Negative correlation: Higher crime rates associated with slower broadband.\n")
-  } else {
-    cat("Positive correlation: Higher crime rates associated with faster broadband.\n")
-  }
-}
-
-cat("\n=== Broadband vs Crime Model Complete! ===\n")
