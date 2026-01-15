@@ -1,0 +1,22 @@
+# =============================================================================
+# Git Ignore - Exclude files from GitHub
+# =============================================================================
+
+# Exclude these folders/files (as requested)
+Report/
+run_analysis.R
+clean_code_script/
+
+# R temporary files
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
