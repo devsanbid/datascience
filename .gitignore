@@ -3,7 +3,8 @@
 # =============================================================================
 
 # Exclude these folders/files (as requested)
-test/
+Report
+
 # R temporary files
 .Rhistory
 .RData
